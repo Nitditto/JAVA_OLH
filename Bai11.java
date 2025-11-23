@@ -1,10 +1,14 @@
+
 import java.util.Scanner;
 
-public class b11 {
+public class Bai11 {
+
     public static boolean check(int n) {
         int sum = 0;
         for (int i = 1; i <= n / 2; i++) {
-            if (n % i == 0) sum += i;
+            if (n % i == 0) {
+                sum += i;
+            }
         }
         return sum == n;
     }

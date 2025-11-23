@@ -1,0 +1,1 @@
+{"name":"Local: b4_test","url":"d:\\CODING\\Java\\HomeWork\\b4_test.java","tests":[{"id":1763648864278,"input":"5","output":"    *    \n   ***   \n  *****  \n ******* \n*********"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CODING\\Java\\HomeWork\\b4_test.java","group":"local","local":true}

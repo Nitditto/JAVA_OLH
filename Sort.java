@@ -1,6 +1,8 @@
+
 import java.util.*;
 
 public class Sort {
+
     // Bubble Sort
     public static void bubbleSort(ArrayList<Integer> arr) {
         int n = arr.size();
@@ -14,11 +16,14 @@ public class Sort {
             }
             if (swapped) {
                 System.out.print("Buoc " + (i + 1) + ": ");
-                for (int x : arr) System.out.print(x + " ");
+                for (int x : arr) {
+                    System.out.print(x + " ");
+                }
                 System.out.println();
             }
         }
     }
+
     // Insertion Sort
     public static void insertionSort(ArrayList<Integer> arr) {
         int n = arr.size();
@@ -38,6 +43,7 @@ public class Sort {
             System.out.println();
         }
     }
+
     // Selection Sort
     public static void selectionSort(ArrayList<Integer> arr) {
         int n = arr.size();
@@ -51,15 +57,20 @@ public class Sort {
             Collections.swap(arr, i, min_idx);
 
             System.out.print("Buoc " + (i + 1) + ": ");
-            for (int x : arr) System.out.print(x + " ");
+            for (int x : arr) {
+                System.out.print(x + " ");
+            }
             System.out.println();
         }
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         ArrayList<Integer> arr = new ArrayList<>();
-        for (int i = 0; i < n; i++) arr.add(sc.nextInt());
+        for (int i = 0; i < n; i++) {
+            arr.add(sc.nextInt());
+        }
         ArrayList<Integer> arr1 = new ArrayList<>(arr);
         ArrayList<Integer> arr2 = new ArrayList<>(arr);
         ArrayList<Integer> arr3 = new ArrayList<>(arr);
