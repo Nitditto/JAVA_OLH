@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class Bai4Test {
+public class Ex4Test {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

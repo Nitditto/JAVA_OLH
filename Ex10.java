@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class Bai10 {
+public class Ex10 {
 
     public static int gcd(int a, int b) {
         if (b == 0) {

@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class Bai7 {
+public class Ex7 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -47,7 +47,7 @@ public class Bai7 {
             case 2 ->
                 ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) ? 29 : 28;
             default ->
-                0; // Hoặc ném ngoại lệ
+                0; 
         };
 
         if (day == 0) {

@@ -2,7 +2,7 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Bai1Test {
+public class Ex1Test {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

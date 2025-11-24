@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class Bai9 {
+public class Ex9 {
 
     public static boolean check(int n) {
         int tong = 0;

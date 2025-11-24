@@ -2,7 +2,7 @@
 import java.util.Scanner;
 import java.util.TreeSet;
 
-public class Bai12 {
+public class Ex12 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

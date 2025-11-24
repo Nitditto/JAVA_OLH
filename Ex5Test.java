@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-public class Bai5Test {
+public class Ex5Test {
 
     public static void solve(double a, double b, double c) {
         double delta = b * b - 4.0 * a * c;

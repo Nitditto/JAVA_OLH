@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class Bai11 {
+public class Ex11 {
 
     public static boolean check(int n) {
         int sum = 0;
