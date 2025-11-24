@@ -4,14 +4,14 @@ import java.util.Scanner;
 public class Ex9 {
 
     public static boolean check(int n) {
-        int tong = 0;
+        int sum = 0;
         int tmp = n;
         while (n > 0) {
             int i = n % 10;
-            tong += i * i * i;
+            sum += i * i * i;
             n /= 10;
         }
-        return tmp == tong;
+        return tmp == sum;
     }
 
     public static void main(String[] args) {

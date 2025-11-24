@@ -10,10 +10,10 @@ public class Ex2Test {
         for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
         }
-        long tong = 0;
+        long sum = 0;
         for (int i = 0; i < n - 1; i++) {
-            tong += a[i] * a[i + 1];
+            sum += a[i] * a[i + 1];
         }
-        System.out.println(tong);
+        System.out.println(sum);
     }
 }
