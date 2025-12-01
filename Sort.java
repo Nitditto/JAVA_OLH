@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Sort {
 
-    // Bubble Sort
+    // Bubble Sort: so sánh từng cặp phần tử liền kề trong mảng. Nếu phần tử đứng trước lớn hơn phần tử đứng sau → đổi chỗ. Sau mỗi vòng lặp, phần tử lớn nhất sẽ “nổi” dần về cuối mảng (giống bong bóng nổi lên mặt nước).
     public static void bubbleSort(ArrayList<Integer> arr) {
         int n = arr.size();
         for (int i = 0; i < n - 1; i++) {
@@ -24,7 +24,7 @@ public class Sort {
         }
     }
 
-    // Insertion Sort
+    // Insertion Sort: so sánh phần tử hiện tại với các phần tử bên trải đã sắp xếp
     public static void insertionSort(ArrayList<Integer> arr) {
         int n = arr.size();
         for (int i = 0; i < n; i++) {
