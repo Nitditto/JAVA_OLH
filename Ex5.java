@@ -6,8 +6,8 @@ public class Ex5 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            int q = sc.nextInt();
-            switch (q) {
+            int query = sc.nextInt();
+            switch (query) {
                 case 1 -> {
                     double n = sc.nextDouble();
                     System.out.println((n * 1.8) + 32);

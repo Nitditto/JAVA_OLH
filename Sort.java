@@ -24,7 +24,7 @@ public class Sort {
         }
     }
 
-    // Insertion Sort
+    // Insertion Sort: so sánh phần tử hiện tại với các phần tử bên trái đã sắp xếp
     public static void insertionSort(ArrayList<Integer> arr) {
         int n = arr.size();
         for (int i = 0; i < n; i++) {
