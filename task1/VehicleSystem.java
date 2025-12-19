@@ -114,6 +114,8 @@ class Motorcycle extends Vehicle {
   private String type;
   private int power;
 
+  public Motorcycle() {
+  }
   @Override
   public void inputInfo(Scanner sc) {
     super.inputInfo(sc);
