@@ -143,15 +143,18 @@ class Car extends Vehicle {
 }
 
 class Motorcycle extends Vehicle {
+
   private static final BigDecimal IMPORT_TAX_RATE = new BigDecimal("0.30");
   private static final BigDecimal SPECIAL_TAX_RATE = new BigDecimal("0.20");
   private static final double CAPACITY = 150.0;
+
   private double cylinderCapacity;
   private String type;
   private int power;
 
   public Motorcycle() {
   }
+
   @Override
   public void inputInfo(Scanner sc) {
     super.inputInfo(sc);
@@ -258,5 +261,6 @@ public class VehicleSystem {
     for (Vehicle vehicle : vehicles) {
       vehicle.displayInfo();
     }
+    sc.close();
   }
 }
