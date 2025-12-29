@@ -11,6 +11,14 @@ class Customer {
 
   private final ArrayList<Vehicle> purchaseHistory;
 
+  public enum LoyaltyLevel {
+    REGULAR, SILVER, GOLD, PLATINUM
+  }
+
+  private static final int MIN_PLATINUM_PURCHASES = 10;
+  private static final int MIN_GOLD_PURCHASES = 5;
+  private static final int MIN_SILVER_PURCHASES = 3;
+
   public Customer(String name, String address, String phone, BigDecimal balance) {
     this.name = name;
     this.address = address;
@@ -35,18 +43,14 @@ class Customer {
     return balance;
   }
 
-  public enum LoyaltyLevel {
-    REGULAR, SILVER, GOLD, PLATINUM
-  }
-
   public LoyaltyLevel getLoyaltyLevel() {
     int count = purchaseHistory.size();
 
-    if (count >= 10)
+    if (count >= MIN_PLATINUM_PURCHASES)
       return LoyaltyLevel.PLATINUM;
-    if (count >= 5)
+    if (count >= MIN_GOLD_PURCHASES)
       return LoyaltyLevel.GOLD;
-    if (count >= 3)
+    if (count >= MIN_SILVER_PURCHASES)
       return LoyaltyLevel.SILVER;
 
     return LoyaltyLevel.REGULAR;
