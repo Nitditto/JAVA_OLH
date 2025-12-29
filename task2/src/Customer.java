@@ -10,7 +10,6 @@ class Customer {
   private BigDecimal balance;
 
   private final ArrayList<Vehicle> purchaseHistory;
-  // private ArrayList<Customer> customers;
 
   public Customer(String name, String address, String phone, BigDecimal balance) {
     this.name = name;
@@ -36,15 +35,21 @@ class Customer {
     return balance;
   }
 
-  public String getLoyaltyLevel() {
+  public enum LoyaltyLevel {
+    REGULAR, SILVER, GOLD, PLATINUM
+  }
+
+  public LoyaltyLevel getLoyaltyLevel() {
     int count = purchaseHistory.size();
+
     if (count >= 10)
-      return "PLATINUM";
-    else if (count >= 5)
-      return "GOLD";
-    else if (count >= 3)
-      return "SILVER";
-    return "REGULAR";
+      return LoyaltyLevel.PLATINUM;
+    if (count >= 5)
+      return LoyaltyLevel.GOLD;
+    if (count >= 3)
+      return LoyaltyLevel.SILVER;
+
+    return LoyaltyLevel.REGULAR;
   }
 
   public void addPurchase(Vehicle vehicle) {
@@ -58,11 +63,14 @@ class Customer {
     System.out.printf("Balance: %,15.0f VND\n", balance);
     System.out.println("Loyalty Level: " + getLoyaltyLevel());
     System.out.println("Owned Vehicles: " + purchaseHistory.size());
+
     if (!purchaseHistory.isEmpty()) {
       System.out.print("History: ");
-      for (Vehicle v : purchaseHistory)
-        System.out.print(v.modelName + " ");
-      System.out.println();
+      for (int i = 0; i < purchaseHistory.size(); i++) {
+        Vehicle v = purchaseHistory.get(i);
+        System.out.printf(" %d. %s %s (%d)\n",
+            (i + 1), v.brand, v.modelName, v.productionYear);
+      }
     }
   }
 }

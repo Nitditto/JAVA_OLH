@@ -1,4 +1,4 @@
-public class InventoryItem {
+class InventoryItem {
 
   private Vehicle vehicle;
   private int quantity;
