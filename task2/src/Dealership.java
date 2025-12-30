@@ -3,7 +3,7 @@ import java.util.ArrayList;
 class Dealership {
 
   private String name;
-  private ArrayList<InventoryItem> inventory = new ArrayList<>();
+  private ArrayList<InventoryItem> inventories = new ArrayList<>();
   private ArrayList<Customer> customers = new ArrayList<>();
 
   public Dealership(String name) {
@@ -11,21 +11,21 @@ class Dealership {
   }
 
   public void addVehicleToStock(Vehicle vehicle, int quantity) {
-    this.inventory.add(new InventoryItem(vehicle, quantity));
+    this.inventories.add(new InventoryItem(vehicle, quantity));
   }
 
-  public void addCustomerToStock(Customer customer) {
+  public void addCustomer(Customer customer) {
     this.customers.add(customer);
   }
 
   public void displayInventory() {
-    if (inventory.isEmpty()) {
+    if (inventories.isEmpty()) {
       System.out.println("There is no inventory items in this dealership!");
       return;
     }
-    for (int i = 0; i < inventory.size(); i++) {
-      inventory.get(i).getVehicle().displayInfo();
-      System.out.println("Stock Quantity: " + inventory.get(i).getQuantity());
+    for (int i = 0; i < inventories.size(); i++) {
+      inventories.get(i).getVehicle().displayInfo();
+      System.out.println("Stock Quantity: " + inventories.get(i).getQuantity());
     }
   }
 

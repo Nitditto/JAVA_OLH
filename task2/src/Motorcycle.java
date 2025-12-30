@@ -34,7 +34,7 @@ class Motorcycle extends Vehicle {
 
   @Override
   public BigDecimal calculateImportTax() {
-    return origin ? basePrice.multiply(IMPORT_TAX_RATE) : BigDecimal.ZERO;
+    return isImported ? basePrice.multiply(IMPORT_TAX_RATE) : BigDecimal.ZERO;
   }
 
   @Override

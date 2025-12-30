@@ -4,31 +4,27 @@ import java.util.ArrayList;
 
 class Customer {
 
-  private String name;
+  private String fullName;
   private String address;
-  private String phone;
-  private BigDecimal balance;
+  private String phoneNumber;
+  private BigDecimal accountBalance;
 
   private final ArrayList<Vehicle> purchaseHistory;
-
-  public enum LoyaltyLevel {
-    REGULAR, SILVER, GOLD, PLATINUM
-  }
 
   private static final int MIN_PLATINUM_PURCHASES = 10;
   private static final int MIN_GOLD_PURCHASES = 5;
   private static final int MIN_SILVER_PURCHASES = 3;
 
-  public Customer(String name, String address, String phone, BigDecimal balance) {
-    this.name = name;
+  public Customer(String fullName, String address, String phoneNumber, BigDecimal accountBalance) {
+    this.fullName = fullName;
     this.address = address;
-    this.phone = phone;
-    this.balance = balance;
+    this.phoneNumber = phoneNumber;
+    this.accountBalance = accountBalance;
     this.purchaseHistory = new ArrayList<>();
   }
 
   public String getName() {
-    return name;
+    return fullName;
   }
 
   public String getAddress() {
@@ -36,11 +32,11 @@ class Customer {
   }
 
   public String getPhone() {
-    return phone;
+    return phoneNumber;
   }
 
   public BigDecimal getBalance() {
-    return balance;
+    return accountBalance;
   }
 
   public LoyaltyLevel getLoyaltyLevel() {
@@ -61,10 +57,10 @@ class Customer {
   }
 
   public void displayCustomerInformation() {
-    System.out.println("Name: " + name);
+    System.out.println("Name: " + fullName);
     System.out.println("Address: " + address);
-    System.out.println("Phone: " + phone);
-    System.out.printf("Balance: %,15.0f VND\n", balance);
+    System.out.println("Phone: " + phoneNumber);
+    System.out.printf("Balance: %,15.0f VND\n", accountBalance);
     System.out.println("Loyalty Level: " + getLoyaltyLevel());
     System.out.println("Owned Vehicles: " + purchaseHistory.size());
 

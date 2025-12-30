@@ -45,8 +45,8 @@ public class VehicleSystem {
       switch (choice) {
         case 1:
           System.out.println("How many vehicles do you want to add?");
-          int n = Integer.parseInt(sc.nextLine());
-          for (int i = 0; i < n; i++) {
+          int vehicleCount = Integer.parseInt(sc.nextLine());
+          for (int i = 0; i < vehicleCount; i++) {
             System.out.println("Vehicle " + (i + 1) + ":");
             System.out.println("1. Car\n2. Moto\n3. Bike");
             int typeChoice;
@@ -69,8 +69,8 @@ public class VehicleSystem {
           break;
 
         case 2:
-          int m = getValidInteger(sc, "Number of Customers to register?");
-          for (int i = 0; i < m; i++) {
+          int customerCount = getValidInteger(sc, "Number of Customers to register?");
+          for (int i = 0; i < customerCount; i++) {
             System.out.println("Customer " + (i + 1) + ":");
             System.out.print("Name: ");
             String name = sc.nextLine();
@@ -80,7 +80,7 @@ public class VehicleSystem {
             String address = sc.nextLine();
             BigDecimal balance = getValidBigDecimal(sc, "Balance");
             Customer customer = new Customer(name, address, phone, balance);
-            dealership.addCustomerToStock(customer);
+            dealership.addCustomer(customer);
           }
           System.out.println("Customer added successfully.");
           break;
