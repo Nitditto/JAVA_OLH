@@ -22,7 +22,7 @@ class Bicycle extends Vehicle {
 
   @Override
   public BigDecimal calculateImportTax() {
-    return isImported ? basePrice.multiply(IMPORT_TAX_RATE) : BigDecimal.ZERO;
+    return origin ? basePrice.multiply(IMPORT_TAX_RATE) : BigDecimal.ZERO;
   }
 
   @Override

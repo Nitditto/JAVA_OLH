@@ -9,7 +9,7 @@ class Customer {
   private String phoneNumber;
   private BigDecimal accountBalance;
 
-  private final ArrayList<Vehicle> purchaseHistory;
+  private final ArrayList<Vehicle> purchasedVehicles;
 
   private static final int MIN_PLATINUM_PURCHASES = 10;
   private static final int MIN_GOLD_PURCHASES = 5;
@@ -20,7 +20,7 @@ class Customer {
     this.address = address;
     this.phoneNumber = phoneNumber;
     this.accountBalance = accountBalance;
-    this.purchaseHistory = new ArrayList<>();
+    this.purchasedVehicles = new ArrayList<>();
   }
 
   public String getName() {
@@ -40,7 +40,7 @@ class Customer {
   }
 
   public LoyaltyLevel getLoyaltyLevel() {
-    int count = purchaseHistory.size();
+    int count = purchasedVehicles.size();
 
     if (count >= MIN_PLATINUM_PURCHASES)
       return LoyaltyLevel.PLATINUM;
@@ -53,7 +53,7 @@ class Customer {
   }
 
   public void addPurchase(Vehicle vehicle) {
-    purchaseHistory.add(vehicle);
+    purchasedVehicles.add(vehicle);
   }
 
   public void displayCustomerInformation() {
@@ -62,12 +62,12 @@ class Customer {
     System.out.println("Phone: " + phoneNumber);
     System.out.printf("Balance: %,15.0f VND\n", accountBalance);
     System.out.println("Loyalty Level: " + getLoyaltyLevel());
-    System.out.println("Owned Vehicles: " + purchaseHistory.size());
+    System.out.println("Owned Vehicles: " + purchasedVehicles.size());
 
-    if (!purchaseHistory.isEmpty()) {
+    if (!purchasedVehicles.isEmpty()) {
       System.out.print("History: ");
-      for (int i = 0; i < purchaseHistory.size(); i++) {
-        Vehicle v = purchaseHistory.get(i);
+      for (int i = 0; i < purchasedVehicles.size(); i++) {
+        Vehicle v = purchasedVehicles.get(i);
         System.out.printf(" %d. %s %s (%d)\n",
             (i + 1), v.brand, v.modelName, v.productionYear);
       }

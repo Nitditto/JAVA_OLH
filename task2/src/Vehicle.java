@@ -8,7 +8,7 @@ abstract class Vehicle {
   protected String brand;
   protected int productionYear;
   protected BigDecimal basePrice;
-  protected boolean isImported;
+  protected boolean origin;
 
   public static final BigDecimal VAT_RATE = new BigDecimal("0.10");
   public static final int ORIGIN_DOMESTIC = 1;
@@ -48,14 +48,14 @@ abstract class Vehicle {
         System.out.println("Invalid choice! Please enter 1 or 2.");
       }
     } while (originChoice != 1 && originChoice != 2);
-    isImported = (originChoice == ORIGIN_IMPORTED);
+    origin = (originChoice == ORIGIN_IMPORTED);
   }
 
   public void displayInfo() {
     System.out.println("Type vehicle: " + this.getClass().getSimpleName());
     System.out.println("Model: " + modelName + " | Brand: " + brand);
     System.out.println(
-        "Year: " + productionYear + " | Origin: " + (isImported ? "Imported" : "Domestic"));
+        "Year: " + productionYear + " | Origin: " + (origin ? "Imported" : "Domestic"));
     System.out.printf("Base Price: %,15.0f VND\n", basePrice);
     System.out.printf("Import Tax: %,15.0f VND\n", calculateImportTax());
     System.out.printf("Special Tax: %,15.0f VND\n", calculateSpecialTax());

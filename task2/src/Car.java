@@ -36,7 +36,7 @@ class Car extends Vehicle {
 
   @Override
   public BigDecimal calculateImportTax() {
-    if (!isImported) {
+    if (!origin) {
       return BigDecimal.ZERO;
     }
     return basePrice.multiply(IMPORT_TAX_RATE);
