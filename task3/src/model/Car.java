@@ -1,8 +1,8 @@
+package task3.src.model;
 
 import java.math.BigDecimal;
-import java.util.Scanner;
 
-class Car extends Vehicle {
+public class Car extends Vehicle {
 
   private static final BigDecimal IMPORT_TAX_RATE = new BigDecimal("0.50");
   private static final BigDecimal SPECIAL_TAX_LOW_RATE = new BigDecimal("0.50");
@@ -17,23 +17,36 @@ class Car extends Vehicle {
   public Car() {
   }
 
-  @Override
-  public void inputInfo(Scanner sc) {
-    super.inputInfo(sc);
-    seatCount = getValidInteger(sc, "Seat Count");
-    System.out.println("Select Fuel Type:");
-    System.out.println("  1. Gasoline (Xang)");
-    System.out.println("  2. Diesel (Dau)");
-    System.out.println("  3. Electric (Dien)");
+  public void setSeatCount(int seatCount) {
+    this.seatCount = seatCount;
+  }
 
-    int fuelType;
-    do {
-      fuelType = getValidInteger(sc, "Choose Fuel (1-3)");
-    } while (fuelType < 1 || fuelType > 3);
-    cylinderCapacity = getValidDouble(sc, "Engine Capacity (cc)");
+  public int getSeatCount() {
+    return seatCount;
+  }
 
-    System.out.print("Body Type (Ex: Sedan, SUV, Truck...): ");
-    bodyType = sc.nextLine();
+  public void setFuelType(String fuelType) {
+    this.fuelType = fuelType;
+  }
+
+  public String getFuelType() {
+    return fuelType;
+  }
+
+  public void setCylinderCapacity(double cylinderCapacity) {
+    this.cylinderCapacity = cylinderCapacity;
+  }
+
+  public double getCylinderCapacity() {
+    return cylinderCapacity;
+  }
+
+  public void setBodyType(String bodyType) {
+    this.bodyType = bodyType;
+  }
+
+  public String getBodyType() {
+    return bodyType;
   }
 
   @Override

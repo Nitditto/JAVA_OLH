@@ -1,3 +1,5 @@
+package task3.src.model;
+
 import java.math.BigDecimal;
 
 public enum LoyaltyLevel {

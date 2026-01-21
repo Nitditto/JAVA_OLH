@@ -1,4 +1,6 @@
-class InventoryItem {
+package task3.src.model;
+
+public class InventoryItem {
   private Vehicle vehicle;
   private int quantity;
 

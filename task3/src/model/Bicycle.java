@@ -1,8 +1,8 @@
+package task3.src.model;
 
 import java.math.BigDecimal;
-import java.util.Scanner;
 
-class Bicycle extends Vehicle {
+public class Bicycle extends Vehicle {
 
   private static final BigDecimal IMPORT_TAX_RATE = new BigDecimal("0.10");
   private String type;
@@ -11,13 +11,20 @@ class Bicycle extends Vehicle {
   public Bicycle() {
   }
 
-  @Override
-  public void inputInfo(Scanner sc) {
-    super.inputInfo(sc);
-    System.out.print("Bicycle Type (Ex: Mountain, Road, Hybrid): ");
-    type = sc.nextLine();
-    System.out.print("Frame Material (Ex: Carbon, Aluminum, Steel): ");
-    material = sc.nextLine();
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setMaterial(String material) {
+    this.material = material;
+  }
+
+  public String getMaterial() {
+    return material;
   }
 
   @Override

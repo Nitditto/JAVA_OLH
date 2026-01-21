@@ -1,8 +1,8 @@
+package task3.src.model;
 
 import java.math.BigDecimal;
-import java.util.Scanner;
 
-class Motorcycle extends Vehicle {
+public class Motorcycle extends Vehicle {
 
   private static final BigDecimal IMPORT_TAX_RATE = new BigDecimal("0.30");
   private static final BigDecimal SPECIAL_TAX_RATE = new BigDecimal("0.20");
@@ -15,22 +15,28 @@ class Motorcycle extends Vehicle {
   public Motorcycle() {
   }
 
-  @Override
-  public void inputInfo(Scanner sc) {
-    super.inputInfo(sc);
-    cylinderCapacity = getValidDouble(sc, "Engine Capacity (cc)");
+  public void setCylinderCapacity(double cylinderCapacity) {
+    this.cylinderCapacity = cylinderCapacity;
+  }
 
-    System.out.println("Select Motorcycle Type:");
-    System.out.println("  1. Manual (Xe so)");
-    System.out.println("  2. Automatic (Tay ga)");
+  public double getCylinderCapacity() {
+    return cylinderCapacity;
+  }
 
-    int typeChoice;
-    do {
-      typeChoice = getValidInteger(sc, "Choose Type (1-2)");
-    } while (typeChoice != 1 && typeChoice != 2);
+  public void setType(String type) {
+    this.type = type;
+  }
 
-    type = (typeChoice == 1) ? "Manual" : "Automatic";
-    power = getValidInteger(sc, "Power (HP/kW)");
+  public String getType() {
+    return type;
+  }
+
+  public void setPower(int power) {
+    this.power = power;
+  }
+
+  public int getPower() {
+    return power;
   }
 
   @Override
