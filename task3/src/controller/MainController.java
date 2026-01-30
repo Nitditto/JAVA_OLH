@@ -3,159 +3,163 @@ package task3.src.controller;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import task3.src.constant.MessageConstant;
+import task3.src.exception.InsufficientBalanceException;
+import task3.src.exception.OutOfStockException;
+import task3.src.exception.StoreException;
 import task3.src.model.Bicycle;
 import task3.src.model.Car;
 import task3.src.model.Customer;
 import task3.src.model.InventoryItem;
 import task3.src.model.Motorcycle;
 import task3.src.model.Vehicle;
-import task3.src.repository.DealershipRepo;
-import task3.src.service.SaleService;
+import task3.src.service.DealershipService;
 import task3.src.utils.InputHelper;
 import task3.src.view.VehicleView;
 
 public class MainController {
 
-  private DealershipRepo repo;
-  private SaleService service;
+  private DealershipService service;
   private VehicleView view;
 
   public MainController() {
+    this.service = new DealershipService();
     this.view = new VehicleView();
   }
 
-  public static void showMenu() {
-    System.out.println("MENU");
-    System.out.println("1. Add Vehicle to Stock ");
-    System.out.println("2. Add New Customer ");
-    System.out.println("3. Show Inventory ");
-    System.out.println("4. Show Customers ");
-    System.out.println("5. Sell vehicles ");
-    System.out.println("0. Exit");
-  }
-
   public void run() {
-    String name = InputHelper.getString("Dealership name");
-    this.repo = new DealershipRepo(name);
-    this.service = new SaleService(repo);
+
+    System.out.println("Welcome to the Vehicle Management System");
 
     while (true) {
       showMenu();
-
       int choice = InputHelper.getValidInteger("Choose Your Choice");
-      switch (choice) {
-        case 1:
-          importVehicle();
-          break;
-        case 2:
-          addCustomer();
-          break;
-        case 3:
-          view.displayInventory(repo.getInventory());
-          break;
-        case 4:
-          view.displayCustomers(repo.getCustomers());
-          break;
-        case 5:
-          sellVehicle();
-          break;
-        case 0:
-          System.out.println("Exit");
-          return;
-        default:
-          System.out.println("Invalid choice.");
+
+      try {
+        switch (choice) {
+          case 1:
+            importVehicle();
+            break;
+          case 2:
+            addCustomer();
+            break;
+          case 3:
+            view.displayInventory(service.getInventory());
+            break;
+          case 4:
+            view.displayCustomers(service.getCustomers());
+            break;
+          case 5:
+            sellVehicle();
+            break;
+          case 0:
+            System.out.println("Exit");
+            return;
+          default:
+            System.out.println("Invalid choice.");
+        }
+      } catch (StoreException e) {
+
+        System.out.println("Error: " + e.getMessage());
+      } catch (Exception e) {
+        System.out.println("An unexpected error occurred: " + e.getMessage());
       }
     }
   }
 
+  private void showMenu() {
+    System.out.println("\nMENU");
+    System.out.println("1. Add Vehicle to Stock");
+    System.out.println("2. Add New Customer");
+    System.out.println("3. Show Inventory");
+    System.out.println("4. Show Customers");
+    System.out.println("5. Sell vehicles");
+    System.out.println("0. Exit");
+  }
+
   private void importVehicle() {
-    System.out.println("How many vehicles do you want to add?");
-    int count = InputHelper.getValidInteger("");
+    int count = InputHelper.getValidInteger("How many vehicles to add?");
     for (int i = 0; i < count; i++) {
       System.out.println("Vehicle " + (i + 1) + ":");
       System.out.println("1. Car\n2. Moto\n3. Bike");
-      int typeChoice;
-      do {
-        typeChoice = InputHelper.getValidInteger("Choose Type ");
-      } while (typeChoice < 1 || typeChoice > 3);
 
-      Vehicle vehicle;
-      if (typeChoice == 1) {
-        vehicle = new Car();
-      } else if (typeChoice == 2) {
-        vehicle = new Motorcycle();
-      } else {
-        vehicle = new Bicycle();
+      int type;
+      do {
+        type = InputHelper.getValidInteger("Choose Type");
+      } while (type < 1 || type > 3);
+
+      Vehicle v;
+      switch (type) {
+        case 1:
+          v = new Car();
+          break;
+        case 2:
+          v = new Motorcycle();
+          break;
+        case 3:
+          v = new Bicycle();
+          break;
+        default:
+
+          continue;
       }
-      view.inputVehicleInfo(vehicle);
+
+      view.inputVehicleInfo(v);
       int qty = InputHelper.getValidInteger("Enter Stock Quantity");
 
-      repo.addVehicleToStock(new InventoryItem(vehicle, qty));
+      service.addVehicleToStock(v, qty);
     }
     System.out.println(MessageConstant.MSG_IMPORT_SUCCESS);
   }
 
   private void addCustomer() {
-    int count = InputHelper.getValidInteger("Number of Customers to register?");
+    int count = InputHelper.getValidInteger("Number of Customers?");
     for (int i = 0; i < count; i++) {
       System.out.println("Customer " + (i + 1) + ":");
-      repo.addCustomer(new Customer(
+      Customer c = new Customer(
           InputHelper.getString("Name"),
           InputHelper.getString("Address"),
           InputHelper.getString("Phone"),
-          InputHelper.getValidBigDecimal("Balance")));
+          InputHelper.getValidBigDecimal("Balance"));
+
+      service.registerCustomer(c);
     }
     System.out.println(MessageConstant.MSG_CUSTOMER_ADDED);
   }
 
   private void sellVehicle() {
-    if (repo.getCustomers().isEmpty()) {
-      System.out.println("Not found customer!");
+
+    if (service.getCustomers().isEmpty()) {
+      System.out.println(MessageConstant.ERR_CUSTOMER_NOT_FOUND);
       return;
     }
-    view.displayCustomers(repo.getCustomers());
-    int customerIdx = InputHelper.getValidInteger("Choose customer number") - 1;
-
-    if (customerIdx < 0 || customerIdx >= repo.getCustomers().size()) {
-      System.out.println("Invalid selection!");
-      return;
-    }
-    Customer customer = repo.getCustomers().get(customerIdx);
-
-    if (repo.getInventory().isEmpty()) {
-      System.out.println("Inventory is empty!");
+    if (service.getInventory().isEmpty()) {
+      System.out.println(MessageConstant.ERR_INVENTORY_EMPTY);
       return;
     }
 
-    view.displayInventory(repo.getInventory());
-    int vehicleIdx = InputHelper.getValidInteger("Choose vehicle number to buy") - 1;
+    view.displayCustomers(service.getCustomers());
+    int cusIdx = InputHelper.getValidInteger("Choose customer number") - 1;
+    Customer customer = service.getCustomerByIndex(cusIdx);
 
-    if (vehicleIdx < 0 || vehicleIdx >= repo.getInventory().size()) {
-      System.out.println("Invalid vehicle selection!");
-      return;
-    }
-
-    InventoryItem item = repo.getInventory().get(vehicleIdx);
+    view.displayInventory(service.getInventory());
+    int vehIdx = InputHelper.getValidInteger("Choose vehicle number to buy") - 1;
+    InventoryItem item = service.getItemByIndex(vehIdx);
     Vehicle vehicle = item.getVehicle();
-
-    if (item.getQuantity() <= 0) {
-      System.out.println("Vehicle not found or out of stock!");
-      ArrayList<InventoryItem> suggestions = service.getSuggestions(vehicle.getClass());
-      view.displaySuggestions(suggestions);
-      return;
-    }
 
     System.out.println("\nProcessing purchase for: " + customer.getName());
 
     BigDecimal finalPrice = service.calculateFinalPrice(vehicle, customer);
+
     view.printTransaction(customer, vehicle, finalPrice);
 
-    boolean success = service.processTransaction(customer, item, finalPrice);
+    try {
+      service.processTransaction(customer, item, finalPrice);
 
-    if (success) {
       view.printSuccess(customer);
-    } else {
-      view.printFail(customer, finalPrice);
+
+    } catch (OutOfStockException | InsufficientBalanceException e) {
+
+      System.out.println(e.getMessage());
 
       ArrayList<InventoryItem> suggestions = service.getSuggestions(vehicle.getClass());
       view.displaySuggestions(suggestions);
