@@ -1,11 +1,9 @@
 package task3.src.controller;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.List;
 import task3.src.constant.MessageConstant;
-import task3.src.exception.InsufficientBalanceException;
-import task3.src.exception.OutOfStockException;
-import task3.src.exception.StoreException;
+import task3.src.exception.BaseException;
 import task3.src.model.Bicycle;
 import task3.src.model.Car;
 import task3.src.model.Customer;
@@ -31,7 +29,7 @@ public class MainController {
     System.out.println("Welcome to the Vehicle Management System");
 
     while (true) {
-      showMenu();
+      view.showMenu();
       int choice = InputHelper.getValidInteger("Choose Your Choice");
 
       try {
@@ -57,23 +55,12 @@ public class MainController {
           default:
             System.out.println("Invalid choice.");
         }
-      } catch (StoreException e) {
-
-        System.out.println("Error: " + e.getMessage());
+      } catch (BaseException e) {
+        view.displayError(e.getMessage());
       } catch (Exception e) {
-        System.out.println("An unexpected error occurred: " + e.getMessage());
+        view.displayError(e.getMessage());
       }
     }
-  }
-
-  private void showMenu() {
-    System.out.println("\nMENU");
-    System.out.println("1. Add Vehicle to Stock");
-    System.out.println("2. Add New Customer");
-    System.out.println("3. Show Inventory");
-    System.out.println("4. Show Customers");
-    System.out.println("5. Sell vehicles");
-    System.out.println("0. Exit");
   }
 
   private void importVehicle() {
@@ -138,8 +125,8 @@ public class MainController {
     }
 
     view.displayCustomers(service.getCustomers());
-    int cusIdx = InputHelper.getValidInteger("Choose customer number") - 1;
-    Customer customer = service.getCustomerByIndex(cusIdx);
+    int customerIndex = InputHelper.getValidInteger("Choose customer number") - 1;
+    Customer customer = service.getCustomerByIndex(customerIndex);
 
     view.displayInventory(service.getInventory());
     int vehIdx = InputHelper.getValidInteger("Choose vehicle number to buy") - 1;
@@ -157,12 +144,14 @@ public class MainController {
 
       view.printSuccess(customer);
 
-    } catch (OutOfStockException | InsufficientBalanceException e) {
+    } catch (BaseException e) {
 
-      System.out.println(e.getMessage());
+      view.displayError(e.getMessage());
 
-      ArrayList<InventoryItem> suggestions = service.getSuggestions(vehicle.getClass());
+      List<InventoryItem> suggestions = service.getSuggestions(vehicle.getClass());
       view.displaySuggestions(suggestions);
+    } catch (Exception e) {
+      view.displayError(e.getMessage());
     }
   }
 }

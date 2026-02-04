@@ -2,6 +2,7 @@ package task3.src.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Customer {
 
@@ -10,7 +11,7 @@ public class Customer {
   private String phoneNumber;
   private BigDecimal accountBalance;
 
-  private final ArrayList<Vehicle> purchasedVehicles;
+  private final List<Vehicle> purchasedVehicles;
 
   private static final int MIN_PLATINUM_PURCHASES = 10;
   private static final int MIN_GOLD_PURCHASES = 5;
@@ -48,7 +49,7 @@ public class Customer {
     purchasedVehicles.add(vehicle);
   }
 
-  public ArrayList<Vehicle> getPurchasedVehicles() {
+  public List<Vehicle> getPurchasedVehicles() {
     return purchasedVehicles;
   }
 
