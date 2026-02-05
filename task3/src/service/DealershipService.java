@@ -39,14 +39,14 @@ public class DealershipService {
 
     public Customer getCustomerByIndex(int index) {
         if (index < 0 || index >= customers.size()) {
-            throw new StoreException("Invalid customer selection!");
+            throw new RuntimeException("Invalid customer selection!");
         }
         return customers.get(index);
     }
 
-    public BigDecimal calculateFinalPrice(Vehicle v, Customer c) {
-        BigDecimal totalPriceBeforeDiscount = v.totalPrice();
-        BigDecimal discountRate = c.getLoyaltyLevel().getDiscountRate();
+    public BigDecimal calculateFinalPrice(Vehicle vehicle, Customer customer) {
+        BigDecimal totalPriceBeforeDiscount = vehicle.totalPrice();
+        BigDecimal discountRate = customer.getLoyaltyLevel().getDiscountRate();
         return totalPriceBeforeDiscount.subtract(totalPriceBeforeDiscount.multiply(discountRate));
     }
 
@@ -60,12 +60,12 @@ public class DealershipService {
         return suggestions;
     }
 
-    public void processTransaction(Customer c, InventoryItem item, BigDecimal finalPrice) {
+    public void processTransaction(Customer customer, InventoryItem item, BigDecimal finalPrice) {
         OutOfStockException.checkOutOfStock(item.getQuantity());
-        InsufficientBalanceException.checkNotEnoughBalance(c.getBalance(), finalPrice);
+        InsufficientBalanceException.checkNotEnoughBalance(customer.getBalance(), finalPrice);
 
-        c.setBalance(c.getBalance().subtract(finalPrice));
+        customer.setBalance(customer.getBalance().subtract(finalPrice));
         item.decreaseQuantity();
-        c.addPurchase(item.getVehicle());
+        customer.addPurchase(item.getVehicle());
     }
 }
